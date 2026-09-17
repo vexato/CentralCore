@@ -66,4 +66,4 @@ jobs:
           sudo apt-get install --no-install-recommends --yes libdbus-1-dev pkg-config
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo package -p centralcore
-      - run: tar -tf target/package/centralcore-1.0.0.crate
+      - run: tar -tf target/package/centralcore-*.crate
