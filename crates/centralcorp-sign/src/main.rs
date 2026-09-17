@@ -398,7 +398,7 @@ fn write_new_private(path: &Path, bytes: &[u8]) -> Result<(), Box<dyn Error + Se
         file.write_all(bytes)?;
         file.write_all(b"\n")?;
         file.sync_all()?;
-        return Ok(());
+        Ok(())
     }
     #[cfg(not(unix))]
     {
