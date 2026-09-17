@@ -17,7 +17,7 @@ the repository or a local checkout:
 
 ```toml
 [dependencies]
-centralcore = { git = "https://github.com/CentralCorp/CentralCore" }
+centralcore = { git = "https://github.com/vexato/CentralCore" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
