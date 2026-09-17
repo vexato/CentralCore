@@ -5,6 +5,14 @@ It provides Vanilla, Fabric and Forge planning; instance lifecycle operations;
 authentication extension points; managed Java; signed static providers; cache,
 repair and update workflows; process management; and structured events.
 
+Install the published crate with:
+
+```toml
+[dependencies]
+centralcore = "1.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+```
+
 On Debian/Ubuntu, building the native Secret Service credential backend requires
 `libdbus-1-dev` and `pkg-config`:
 

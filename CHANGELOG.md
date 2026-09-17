@@ -3,7 +3,11 @@
 This project follows [Keep a Changelog](https://keepachangelog.com/) and
 Semantic Versioning.
 
-## [1.0.0] - Unreleased
+## [Unreleased]
+
+Changes planned for the next release will be listed here.
+
+## [1.0.0] - 2026-09-17
 
 ### Added
 

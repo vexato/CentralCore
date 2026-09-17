@@ -12,12 +12,12 @@ consumer, and `centralcorp-sign`, an offline Ed25519 publisher tool.
 
 ## Install
 
-The crate is prepared as `centralcore` 1.0.0. Until it is published, depend on
-the repository or a local checkout:
+CentralCore is available on [crates.io](https://crates.io/crates/centralcore)
+as version 1.0.0:
 
 ```toml
 [dependencies]
-centralcore = { git = "https://github.com/vexato/CentralCore" }
+centralcore = "1.0"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
