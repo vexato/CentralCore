@@ -1,0 +1,25 @@
+name: Optional E2E
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 2"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-process-smoke:
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test -p centralcore process::tests::detached_process_can_be_stopped_by_a_new_manager -- --exact
+
+  # Real Microsoft/Azuriom/Minecraft tests are intentionally not automatic.
+  # Repository maintainers may add a protected environment and pass its secrets
+  # to the already ignored external E2E tests without exposing them to forks.

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://centralcorp.example/schema/instance-v1.schema.json",
+  "title": "CentralCorp Instance Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "id", "name", "revision", "minecraft"],
+  "properties": {
+    "format_version": { "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "description": { "type": "string", "maxLength": 4096 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "minecraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "loader"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "loader": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type"],
+              "properties": { "type": { "const": "vanilla" } }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "version"],
+              "properties": {
+                "type": { "enum": ["fabric", "forge"] },
+                "version": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^(?![Ll][Aa][Tt][Ee][Ss][Tt]$)[A-Za-z0-9._+-]+$"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "java": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "memory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minimum_mb", "recommended_mb"],
+          "properties": {
+            "minimum_mb": { "type": "integer", "minimum": 256, "maximum": 1048576 },
+            "recommended_mb": { "type": "integer", "minimum": 256, "maximum": 1048576 },
+            "maximum_mb": { "type": "integer", "minimum": 256, "maximum": 1048576 }
+          }
+        }
+      }
+    },
+    "server": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["address"],
+      "properties": {
+        "address": { "type": "string", "minLength": 1, "maxLength": 255 },
+        "port": { "type": "integer", "minimum": 1, "maximum": 65535, "default": 25565 }
+      }
+    },
+    "authentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean", "default": false },
+        "providers": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "default": [],
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "required": { "const": true } }, "required": ["required"] },
+          "then": { "properties": { "providers": { "minItems": 1 } }, "required": ["providers"] }
+        }
+      ]
+    },
+    "files": {
+      "type": "array",
+      "maxItems": 100000,
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "url", "size", "sha256"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "path": { "type": "string", "minLength": 1, "maxLength": 1024 },
+          "url": {
+            "type": "string",
+            "format": "uri-reference",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "size": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+          "required": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "maxItems": 10000,
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "files"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_.-]{0,63}$"
+          },
+          "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "description": { "type": "string", "maxLength": 4096 },
+          "required": { "type": "boolean", "default": false },
+          "default_enabled": { "type": "boolean", "default": false },
+          "requires": {
+            "type": "array",
+            "uniqueItems": true,
+            "default": [],
+            "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]{0,63}$" }
+          },
+          "conflicts": {
+            "type": "array",
+            "uniqueItems": true,
+            "default": [],
+            "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]{0,63}$" }
+          },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100000,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "url", "size", "sha256"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1, "maxLength": 128 },
+                "path": { "type": "string", "minLength": 1, "maxLength": 1024 },
+                "url": { "type": "string", "format": "uri-reference", "minLength": 1, "maxLength": 2048 },
+                "size": { "type": "integer", "minimum": 1 },
+                "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+                "required": { "type": "boolean", "default": true }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

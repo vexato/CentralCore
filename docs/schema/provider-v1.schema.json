@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://centralcorp.example/schema/provider-v1.schema.json",
+  "title": "CentralCorp Static Provider Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format_version", "provider", "instances"],
+  "properties": {
+    "format_version": { "const": 1 },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Required for signed indexes; monotonically increasing provider revision."
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "description": { "type": "string", "maxLength": 4096 }
+      }
+    },
+    "instances": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "manifest"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
+          },
+          "manifest": {
+            "type": "string",
+            "format": "uri-reference",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "description": "Required for signed indexes; SHA-256 of the referenced manifest bytes."
+          }
+        }
+      }
+    }
+  }
+}

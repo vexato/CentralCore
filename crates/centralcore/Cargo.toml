@@ -1,0 +1,45 @@
+[package]
+name = "centralcore"
+description = "UI-independent Minecraft launcher engine"
+version = "1.0.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+documentation = "https://docs.rs/centralcore"
+readme = "README.md"
+keywords = ["minecraft", "launcher", "game", "rust"]
+categories = ["games", "api-bindings"]
+include = ["src/**", "tests/**", "examples/**", "README.md", "LICENSE", "Cargo.toml"]
+
+[dependencies]
+async-trait.workspace = true
+base64.workspace = true
+ed25519-dalek.workspace = true
+futures-util.workspace = true
+getrandom.workspace = true
+fs2.workspace = true
+flate2.workspace = true
+md5.workspace = true
+keyring.workspace = true
+quick-xml.workspace = true
+regex.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_jcs.workspace = true
+sha1.workspace = true
+sha2.workspace = true
+sysinfo.workspace = true
+tar.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+url.workspace = true
+zeroize.workspace = true
+zip.workspace = true
+
+[dev-dependencies]
+rand_core.workspace = true
+tempfile.workspace = true
+tracing-subscriber.workspace = true

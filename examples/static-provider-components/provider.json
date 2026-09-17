@@ -1,0 +1,13 @@
+{
+  "format_version": 1,
+  "provider": {
+    "id": "component-demo",
+    "name": "Component Demo"
+  },
+  "instances": [
+    {
+      "id": "fabric-demo",
+      "manifest": "instances/fabric-demo.json"
+    }
+  ]
+}

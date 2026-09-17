@@ -1,0 +1,68 @@
+{
+  "format_version": 1,
+  "id": "fabric-demo",
+  "name": "Fabric Components Demo",
+  "description": "Schema example using fixture payloads instead of redistributed mods.",
+  "revision": 2,
+  "minecraft": {
+    "version": "1.20.4",
+    "loader": {
+      "type": "fabric",
+      "version": "0.19.5"
+    }
+  },
+  "files": [
+    {
+      "id": "phase8-required-config",
+      "path": "config/phase8-required.json",
+      "url": "../files/required-config.json",
+      "size": 25,
+      "sha256": "03703051bb18c0e72475b2cc77a8cde59337f9c880bf09fb57b0f774ab4a5acb"
+    }
+  ],
+  "components": [
+    {
+      "id": "fabric-api",
+      "name": "Fabric API fixture",
+      "required": true,
+      "files": [
+        {
+          "id": "fabric-api-jar",
+          "path": "mods/fabric-api.fixture",
+          "url": "../files/fabric-api.fixture",
+          "size": 19,
+          "sha256": "4dd6d986862bc644a439749d1b06f66a27da14f5b40c88ef61427cff0cab1fb4"
+        }
+      ]
+    },
+    {
+      "id": "sodium",
+      "name": "Sodium fixture",
+      "default_enabled": true,
+      "files": [
+        {
+          "id": "sodium-jar",
+          "path": "mods/sodium.fixture",
+          "url": "../files/sodium.fixture",
+          "size": 18,
+          "sha256": "7d88cf58873fe73228b964b226dbf98415ac66b7600358eeac1f63e333f5265d"
+        }
+      ]
+    },
+    {
+      "id": "iris",
+      "name": "Iris fixture",
+      "default_enabled": false,
+      "requires": ["sodium"],
+      "files": [
+        {
+          "id": "iris-jar",
+          "path": "mods/iris.fixture",
+          "url": "../files/iris.fixture",
+          "size": 13,
+          "sha256": "3a4ac5eae76aa22346bd5ceb5e3a300cf94a853b43eb17946cd208351e8b3d04"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+/target/
+/.tokensave/
+/.centralcore/
+/.tmp/
+/.phase*/
+/.phse*/
+*.tmp
+*.private.json
+*.key.private.json

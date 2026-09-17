@@ -1,0 +1,14 @@
+{
+  "format_version": 1,
+  "provider": {
+    "id": "centralcore-demo",
+    "name": "CentralCore Static Demo",
+    "description": "A backend-free Vanilla provider example."
+  },
+  "instances": [
+    {
+      "id": "survival",
+      "manifest": "instances/survival.json"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "format_version": 1,
+  "id": "survival",
+  "name": "Static Survival",
+  "description": "Vanilla 1.20.4 plus one harmless provider-managed config file.",
+  "revision": 1,
+  "minecraft": {
+    "version": "1.20.4",
+    "loader": {
+      "type": "vanilla"
+    }
+  },
+  "java": {
+    "memory": {
+      "minimum_mb": 1024,
+      "recommended_mb": 2048,
+      "maximum_mb": 4096
+    }
+  },
+  "server": {
+    "address": "play.example.com",
+    "port": 25565
+  },
+  "files": [
+    {
+      "id": "centralcore-test-config",
+      "path": "config/centralcorp-test.json",
+      "url": "../files/config/centralcorp-test.json",
+      "size": 17,
+      "sha256": "a050ef06ea542b8fd8781f1e945f9adcd03c7ae5190719e66ba826e2059fce12"
+    }
+  ]
+}
