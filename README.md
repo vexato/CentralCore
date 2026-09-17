@@ -21,6 +21,10 @@ centralcore = { git = "https://github.com/CentralCorp/CentralCore" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
+Linux builds use the system Secret Service through D-Bus. On Debian/Ubuntu,
+install the native build prerequisites with
+`sudo apt-get install libdbus-1-dev pkg-config`.
+
 ## Quickstart
 
 ```rust,no_run

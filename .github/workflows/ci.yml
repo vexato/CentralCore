@@ -26,6 +26,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux native dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes libdbus-1-dev pkg-config
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
@@ -42,6 +47,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux native dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes libdbus-1-dev pkg-config
       - uses: dtolnay/rust-toolchain@1.88
       - uses: Swatinem/rust-cache@v2
       - run: cargo check -p centralcore --all-targets
@@ -51,6 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux native dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes libdbus-1-dev pkg-config
       - uses: dtolnay/rust-toolchain@stable
       - run: cargo package -p centralcore
       - run: tar -tf target/package/centralcore-1.0.0.crate

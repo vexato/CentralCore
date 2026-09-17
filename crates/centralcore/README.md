@@ -5,6 +5,13 @@ It provides Vanilla, Fabric and Forge planning; instance lifecycle operations;
 authentication extension points; managed Java; signed static providers; cache,
 repair and update workflows; process management; and structured events.
 
+On Debian/Ubuntu, building the native Secret Service credential backend requires
+`libdbus-1-dev` and `pkg-config`:
+
+```text
+sudo apt-get install libdbus-1-dev pkg-config
+```
+
 ```rust,no_run
 use centralcore::{CentralCore, InstanceSpec};
 
